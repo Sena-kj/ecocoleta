@@ -56,3 +56,31 @@ export function useRanking() {
 export function useArticles() {
   return useQuery({ queryKey: ['articles'], queryFn: api.getArticles })
 }
+
+export function useRewards() {
+  return useQuery({ queryKey: ['rewards'], queryFn: api.getRewards })
+}
+
+export function useRedeem() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: api.redeemReward,
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['rewards'] })
+      qc.invalidateQueries({ queryKey: ['me'] })
+      qc.invalidateQueries({ queryKey: ['redemptions'] })
+    },
+  })
+}
+
+export function useRedemptions() {
+  return useQuery({ queryKey: ['redemptions'], queryFn: api.getRedemptions })
+}
+
+export function useAllPoints() {
+  return useQuery({ queryKey: ['all-points'], queryFn: api.getAllPoints })
+}
+
+export function useAdminMetrics() {
+  return useQuery({ queryKey: ['admin-metrics'], queryFn: api.getAdminMetrics })
+}

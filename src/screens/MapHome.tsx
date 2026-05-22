@@ -30,6 +30,7 @@ function Recenter({ points }: { points: CollectionPoint[] }) {
 export default function MapHome() {
   const navigate = useNavigate()
   const [filters, setFilters] = useState<MaterialCategory[]>([])
+  const [sheetOpen, setSheetOpen] = useState(true)
   const { data: points, isLoading } = useNearbyPoints(CURITIBA_CENTER, 20000, filters)
 
   function toggle(cat: MaterialCategory) {
@@ -80,13 +81,21 @@ export default function MapHome() {
           {points && <Recenter points={points} />}
         </MapContainer>
 
-        <div className="point-sheet">
-          <div className="point-sheet__grab" />
+        {!sheetOpen && (
+          <button className="sheet-fab" onClick={() => setSheetOpen(true)}>
+            📋 Ver {points?.length ?? 0} pontos
+          </button>
+        )}
+
+        <div className={`point-sheet ${sheetOpen ? '' : 'point-sheet--collapsed'}`}>
+          <button className="point-sheet__toggle" onClick={() => setSheetOpen((o) => !o)} aria-label={sheetOpen ? 'Recolher lista' : 'Expandir lista'}>
+            <span className="point-sheet__grab" />
+          </button>
           <div className="point-sheet__head">
             <h3>Pontos próximos</h3>
-            <span className="muted" style={{ fontSize: 'var(--fs-sm)' }}>
-              {points?.length ?? 0} encontrados
-            </span>
+            <button className="sheet-collapse" onClick={() => setSheetOpen(false)}>
+              Ver mapa ↓
+            </button>
           </div>
           <div className="point-sheet__list">
             {isLoading && <Spinner label="Buscando pontos em Curitiba…" />}

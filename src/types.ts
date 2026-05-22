@@ -99,6 +99,30 @@ export interface EducationArticle {
   readMinutes: number
 }
 
+export type RewardKind = 'ELETRONICO' | 'DESCONTO' | 'PRODUTO' | 'SERVICO'
+
+export interface Reward {
+  id: string
+  name: string
+  description: string
+  emoji: string
+  kind: RewardKind
+  pointsCost: number
+  stock: number
+  partnerName?: string
+  active: boolean
+}
+
+export interface Redemption {
+  id: string
+  rewardId: string
+  rewardName: string
+  userName: string
+  pointsSpent: number
+  status: 'PENDING' | 'DELIVERED' | 'CANCELLED'
+  createdAt: string
+}
+
 // ---- Metadados de categoria (rótulo PT-BR, emoji, pontos por unidade) ----
 export interface CategoryMeta {
   category: MaterialCategory

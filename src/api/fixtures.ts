@@ -4,6 +4,8 @@ import type {
   Disposal,
   EducationArticle,
   RankingEntry,
+  Reward,
+  Redemption,
   User,
 } from '../types'
 
@@ -308,6 +310,23 @@ export const ranking: RankingEntry[] = [
   { position: 8, userId: 'u-206', name: 'Caio Bertolini', neighborhood: 'Boqueirão', monthlyPoints: 140, isCurrentUser: false },
   { position: 9, userId: 'u-207', name: 'Priscila Naves', neighborhood: 'Pinheirinho', monthlyPoints: 95, isCurrentUser: false },
   { position: 10, userId: 'u-208', name: 'Vitor Hugo Lemes', neighborhood: 'Santa Felicidade', monthlyPoints: 70, isCurrentUser: false },
+]
+
+export const rewards: Reward[] = [
+  { id: 'r-001', name: 'Smartphone recondicionado', description: 'Celular seminovo certificado, 64GB, com garantia de 90 dias.', emoji: '📱', kind: 'ELETRONICO', pointsCost: 1200, stock: 4, partnerName: 'InfoCell Batel', active: true },
+  { id: 'r-002', name: 'Notebook recondicionado', description: 'Notebook revisado, ideal para estudo e trabalho leve.', emoji: '💻', kind: 'ELETRONICO', pointsCost: 3000, stock: 2, partnerName: 'CompuClean Mercês', active: true },
+  { id: 'r-003', name: 'Fone Bluetooth', description: 'Fone sem fio recondicionado com estojo de carga.', emoji: '🎧', kind: 'ELETRONICO', pointsCost: 600, stock: 9, partnerName: 'TechFix Assistência', active: true },
+  { id: 'r-004', name: 'Carregador turbo', description: 'Carregador USB-C 30W novo, de parceiro.', emoji: '🔌', kind: 'ELETRONICO', pointsCost: 250, stock: 20, partnerName: 'ReparaTudo Portão', active: true },
+  { id: 'r-005', name: '20% OFF em conserto', description: 'Desconto em qualquer reparo nas assistências parceiras.', emoji: '🏷️', kind: 'DESCONTO', pointsCost: 150, stock: 100, partnerName: 'Rede parceira', active: true },
+  { id: 'r-006', name: 'Ecobag EcoColeta', description: 'Sacola reutilizável de algodão cru com a marca do projeto.', emoji: '👜', kind: 'PRODUTO', pointsCost: 120, stock: 50, active: true },
+  { id: 'r-007', name: 'Kit higienização de celular', description: 'Limpeza e checkup técnico do seu aparelho.', emoji: '🧴', kind: 'SERVICO', pointsCost: 200, stock: 30, partnerName: 'TechFix Assistência', active: true },
+  { id: 'r-008', name: 'Power bank 10.000mAh', description: 'Bateria portátil nova de parceiro.', emoji: '🔋', kind: 'ELETRONICO', pointsCost: 450, stock: 0, partnerName: 'InfoCell Batel', active: true },
+]
+
+export const redemptions: Redemption[] = [
+  { id: 're-001', rewardId: 'r-005', rewardName: '20% OFF em conserto', userName: 'Marina Castilho', pointsSpent: 150, status: 'DELIVERED', createdAt: '2026-05-12T10:00:00Z' },
+  { id: 're-002', rewardId: 'r-006', rewardName: 'Ecobag EcoColeta', userName: 'Rafael Tominaga', pointsSpent: 120, status: 'PENDING', createdAt: '2026-05-21T16:30:00Z' },
+  { id: 're-003', rewardId: 'r-003', rewardName: 'Fone Bluetooth', userName: 'Bianca Ferraz', pointsSpent: 600, status: 'PENDING', createdAt: '2026-05-22T09:15:00Z' },
 ]
 
 export const articles: EducationArticle[] = [

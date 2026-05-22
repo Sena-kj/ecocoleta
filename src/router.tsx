@@ -11,6 +11,12 @@ import History from './screens/History'
 import Profile from './screens/Profile'
 import Ranking from './screens/Ranking'
 import Education from './screens/Education'
+import Rewards from './screens/Rewards'
+import AdminShell from './admin/AdminShell'
+import AdminDashboard from './admin/AdminDashboard'
+import AdminCatalog from './admin/AdminCatalog'
+import AdminPartners from './admin/AdminPartners'
+import AdminRedemptions from './admin/AdminRedemptions'
 
 export const router = createBrowserRouter([
   { path: '/', element: <Navigate to="/onboarding" replace /> },
@@ -26,10 +32,21 @@ export const router = createBrowserRouter([
       { path: 'point/:id', element: <PointDetail /> },
       { path: 'disposal/new', element: <CreateDisposal /> },
       { path: 'qr/:id', element: <QrCode /> },
+      { path: 'rewards', element: <Rewards /> },
       { path: 'history', element: <History /> },
       { path: 'profile', element: <Profile /> },
       { path: 'ranking', element: <Ranking /> },
       { path: 'education', element: <Education /> },
+    ],
+  },
+  {
+    path: '/admin',
+    element: <AdminShell />,
+    children: [
+      { index: true, element: <AdminDashboard /> },
+      { path: 'catalog', element: <AdminCatalog /> },
+      { path: 'partners', element: <AdminPartners /> },
+      { path: 'redemptions', element: <AdminRedemptions /> },
     ],
   },
   { path: '*', element: <Navigate to="/onboarding" replace /> },

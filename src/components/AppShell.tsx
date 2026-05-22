@@ -2,12 +2,12 @@ import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useTheme } from '../lib/theme'
 import { useMe } from '../lib/queries'
 
-function Icon({ name }: { name: 'map' | 'history' | 'ranking' | 'edu' | 'profile' }) {
+function Icon({ name }: { name: 'map' | 'history' | 'ranking' | 'rewards' | 'profile' }) {
   const paths: Record<string, string> = {
     map: 'M9 3 3 5v16l6-2 6 2 6-2V3l-6 2-6-2Zm0 0v16m6-14v16',
     history: 'M12 8v4l3 2m6-2a9 9 0 1 1-9-9 9 9 0 0 1 9 9Z',
     ranking: 'M8 21V9H4v12m6 0V3h4v18m6 0v-8h-4v8M2 21h20',
-    edu: 'M3 6l9-3 9 3-9 3-9-3Zm0 0v8m4-6v6a5 3 0 0 0 10 0V8',
+    rewards: 'M20 12v10H4V12M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7Zm0 0h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7Z',
     profile: 'M20 21a8 8 0 1 0-16 0M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z',
   }
   return (
@@ -19,9 +19,9 @@ function Icon({ name }: { name: 'map' | 'history' | 'ranking' | 'edu' | 'profile
 
 const NAV = [
   { to: '/app/map', label: 'Mapa', icon: 'map' as const },
+  { to: '/app/rewards', label: 'Trocas', icon: 'rewards' as const },
   { to: '/app/history', label: 'Histórico', icon: 'history' as const },
   { to: '/app/ranking', label: 'Ranking', icon: 'ranking' as const },
-  { to: '/app/education', label: 'Aprender', icon: 'edu' as const },
   { to: '/app/profile', label: 'Perfil', icon: 'profile' as const },
 ]
 

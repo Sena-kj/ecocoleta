@@ -64,7 +64,19 @@ export default function Profile() {
         </div>
       </div>
 
-      <div style={{ marginTop: 'var(--sp-7)' }}>
+      <div className="stack" style={{ gap: 'var(--sp-3)', marginTop: 'var(--sp-6)' }}>
+        <Card className="profile-link" onClick={() => navigate('/app/education')}>
+          <span>📚 Aprender sobre e-waste</span><span aria-hidden>→</span>
+        </Card>
+        <Card className="profile-link" onClick={() => navigate('/app/rewards')}>
+          <span>🎁 Trocar pontos por itens</span><span aria-hidden>→</span>
+        </Card>
+        <Card className="profile-link" onClick={() => navigate('/admin')}>
+          <span>🛠️ Painel administrativo</span><span aria-hidden>→</span>
+        </Card>
+      </div>
+
+      <div style={{ marginTop: 'var(--sp-6)' }}>
         <Button variant="outline" block onClick={() => navigate('/login')}>Sair da conta</Button>
       </div>
     </div>

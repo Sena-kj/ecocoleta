@@ -11,6 +11,8 @@ import type {
   EducationArticle,
   MaterialCategory,
   RankingEntry,
+  Reward,
+  Redemption,
   User,
 } from '../types'
 
@@ -127,6 +129,81 @@ export async function getArticles(): Promise<EducationArticle[]> {
   if (IS_MOCK) {
     await delay(300)
     return fx.articles
+  }
+  return notLive()
+}
+
+export async function getRewards(): Promise<Reward[]> {
+  if (IS_MOCK) {
+    await delay(400)
+    return fx.rewards
+  }
+  return notLive()
+}
+
+export async function redeemReward(rewardId: string): Promise<Redemption> {
+  if (IS_MOCK) {
+    await delay(600)
+    const reward = fx.rewards.find((r) => r.id === rewardId)
+    if (!reward) throw new Error('Item não encontrado')
+    if (reward.stock <= 0) throw new Error('Item esgotado')
+    if (fx.currentUser.totalPoints < reward.pointsCost) throw new Error('Pontos insuficientes')
+    reward.stock -= 1
+    fx.currentUser.totalPoints -= reward.pointsCost
+    const red: Redemption = {
+      id: `re-${Math.random().toString(36).slice(2, 8)}`,
+      rewardId: reward.id,
+      rewardName: reward.name,
+      userName: fx.currentUser.name,
+      pointsSpent: reward.pointsCost,
+      status: 'PENDING',
+      createdAt: new Date().toISOString(),
+    }
+    fx.redemptions.unshift(red)
+    return red
+  }
+  return notLive()
+}
+
+export async function getRedemptions(): Promise<Redemption[]> {
+  if (IS_MOCK) {
+    await delay(300)
+    return fx.redemptions
+  }
+  return notLive()
+}
+
+export async function getAllPoints(): Promise<CollectionPoint[]> {
+  if (IS_MOCK) {
+    await delay(300)
+    return fx.collectionPoints
+  }
+  return notLive()
+}
+
+export interface AdminMetrics {
+  totalDisposals: number
+  validatedDisposals: number
+  pointsDistributed: number
+  activeUsers: number
+  partners: number
+  pendingPartners: number
+  ewasteKg: number
+}
+
+export async function getAdminMetrics(): Promise<AdminMetrics> {
+  if (IS_MOCK) {
+    await delay(350)
+    const validated = fx.disposals.filter((d) => d.status === 'VALIDATED')
+    return {
+      totalDisposals: fx.disposals.length + 1240,
+      validatedDisposals: validated.length + 1010,
+      pointsDistributed: 84210,
+      activeUsers: 312,
+      partners: fx.collectionPoints.filter((p) => p.isPartner).length,
+      pendingPartners: 3,
+      ewasteKg: 1875,
+    }
   }
   return notLive()
 }
