@@ -152,10 +152,31 @@
 /* ============================================================
    APP SHELL
    ============================================================ */
-.shell { min-height: 100vh; padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
+/* App-shell responsivo: coluna flex de altura total (dvh), conteúdo rola por
+   dentro do <main>, topbar e bottom-nav ficam fixos no layout. Sem cálculos
+   mágicos de altura — adapta a qualquer tela. */
+.shell {
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1080px;
+  margin-inline: auto;
+  position: relative;
+  overflow: hidden;
+}
+.shell > main {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+@media (min-width: 1120px) {
+  .shell { border-inline: 1px solid var(--border); }
+}
 
 .topbar {
-  position: sticky; top: 0; z-index: 50;
+  flex: 0 0 auto; z-index: 50;
   height: var(--header-h);
   display: flex; align-items: center; justify-content: space-between;
   padding-inline: var(--sp-5);
@@ -184,10 +205,10 @@
 
 /* Bottom navigation */
 .bottomnav {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: 600;
+  flex: 0 0 auto; z-index: 600;
   display: flex; justify-content: space-around; align-items: stretch;
   padding: 8px max(var(--sp-3), env(safe-area-inset-left)) calc(8px + env(safe-area-inset-bottom));
-  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
   backdrop-filter: blur(16px);
   border-top: 1px solid var(--border);
 }
@@ -206,7 +227,7 @@
    AUTH (login / cadastro / onboarding)
    ============================================================ */
 .auth {
-  min-height: 100vh; display: grid; grid-template-columns: 1.1fr 1fr;
+  min-height: 100dvh; display: grid; grid-template-columns: 1.1fr 1fr;
 }
 .auth__art {
   position: relative; overflow: hidden;
@@ -249,8 +270,8 @@
 /* ============================================================
    MAP / HOME
    ============================================================ */
-.map-screen { position: relative; }
-.map-wrap { height: calc(100vh - var(--header-h) - 72px); position: relative; overflow: hidden; }
+.map-screen { position: relative; height: 100%; }
+.map-wrap { height: 100%; position: relative; overflow: hidden; }
 .leaflet-container { height: 100%; width: 100%; background: var(--surface-2); font-family: var(--font-body); }
 [data-theme='dark'] .leaflet-tile { filter: invert(1) hue-rotate(180deg) brightness(0.92) contrast(0.95); }
 [data-theme='dark'] .leaflet-container { background: #0a1f17; }
@@ -334,7 +355,7 @@
 .info-line__label { font-size: var(--fs-xs); color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; }
 .info-line__value { font-weight: 600; }
 .materials-grid { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
-.sticky-cta { position: sticky; bottom: calc(80px + env(safe-area-inset-bottom)); margin-top: var(--sp-5); }
+.sticky-cta { position: sticky; bottom: var(--sp-4); margin-top: var(--sp-5); }
 
 /* Disposal create */
 .qty-stepper { display: flex; align-items: center; gap: var(--sp-4); }
@@ -345,7 +366,7 @@
 .points-preview b { font-family: var(--font-display); font-size: 1.8rem; color: var(--accent); }
 
 /* QR screen */
-.qr-screen { min-height: calc(100vh - var(--header-h)); display: grid; place-items: center; padding: var(--sp-6); }
+.qr-screen { min-height: 100%; display: grid; place-items: center; padding: var(--sp-6); }
 .qr-card { max-width: 420px; width: 100%; text-align: center; padding: var(--sp-7) var(--sp-6); }
 .qr-frame { display: inline-grid; place-items: center; padding: var(--sp-5); background: #fff; border-radius: var(--r-lg); box-shadow: var(--shadow-md); margin-block: var(--sp-5); }
 .qr-timer { font-family: var(--font-display); font-size: 2.4rem; font-weight: 700; color: var(--accent); }
@@ -398,7 +419,7 @@
 .article-card__meta { margin-top: var(--sp-3); font-size: var(--fs-xs); color: var(--text-faint); font-weight: 700; }
 
 /* Onboarding */
-.onb { min-height: 100vh; display: grid; place-items: center; padding: var(--sp-6); }
+.onb { min-height: 100dvh; display: grid; place-items: center; padding: var(--sp-6); }
 .onb__card { max-width: 460px; width: 100%; text-align: center; padding: var(--sp-8) var(--sp-6); }
 .onb__emoji { font-size: 4rem; margin-bottom: var(--sp-4); }
 .onb__dots { display: flex; gap: var(--sp-2); justify-content: center; margin-block: var(--sp-6); }
@@ -429,7 +450,7 @@
 .modal { max-width: 380px; width: 100%; text-align: center; padding: var(--sp-7) var(--sp-6); display: grid; gap: var(--sp-3); justify-items: center; }
 
 /* ---------------- Admin ---------------- */
-.admin-shell { min-height: 100vh; display: grid; grid-template-columns: 248px 1fr; }
+.admin-shell { height: 100dvh; display: grid; grid-template-columns: 248px 1fr; }
 .admin-side { background: var(--brand-900); color: #cfe0f2; padding: var(--sp-5); display: flex; flex-direction: column; gap: var(--sp-2); }
 .admin-side .brand { color: #fff; margin-bottom: var(--sp-5); }
 .admin-side .brand b { color: var(--leaf-glow); }
@@ -438,7 +459,7 @@
 .admin-nav a:hover { background: rgba(255,255,255,0.06); color: #fff; }
 .admin-nav a.active { background: var(--accent); color: var(--on-accent); }
 .admin-side__foot { margin-top: auto; }
-.admin-main { padding: var(--sp-6) var(--sp-7); overflow-y: auto; max-height: 100vh; }
+.admin-main { padding: var(--sp-6) var(--sp-7); overflow-y: auto; max-height: 100dvh; }
 .admin-main > h1 { font-size: var(--fs-h1); margin-bottom: var(--sp-2); }
 .metric-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--sp-4); margin-top: var(--sp-5); }
 .metric-box { padding: var(--sp-5); }
@@ -458,11 +479,12 @@
 .qty-mini button:hover { border-color: var(--accent); color: var(--accent); }
 .qty-mini b { min-width: 2ch; text-align: center; }
 @media (max-width: 760px) {
-  .admin-shell { grid-template-columns: 1fr; }
+  .admin-shell { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
   .admin-side { flex-direction: row; flex-wrap: wrap; align-items: center; }
   .admin-side .brand { margin-bottom: 0; }
   .admin-nav { flex-direction: row; flex-wrap: wrap; }
   .admin-side__foot { margin: 0; }
+  .admin-main { max-height: none; min-height: 0; }
 }
 
 /* ---------------- Responsive ---------------- */
