@@ -94,7 +94,7 @@ export default function MapHome() {
           <div className="point-sheet__head">
             <h3>Pontos próximos</h3>
             <button className="sheet-collapse" onClick={() => setSheetOpen(false)}>
-              Ver mapa ↓
+              Ocultar
             </button>
           </div>
           <div className="point-sheet__list">

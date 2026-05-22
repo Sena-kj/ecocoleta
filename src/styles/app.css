@@ -160,8 +160,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1080px;
-  margin-inline: auto;
   position: relative;
   overflow: hidden;
 }
@@ -170,9 +168,6 @@
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
-}
-@media (min-width: 1120px) {
-  .shell { border-inline: 1px solid var(--border); }
 }
 
 .topbar {
@@ -329,6 +324,24 @@
 .point-row__meta { font-size: var(--fs-sm); color: var(--text-soft); display: flex; gap: var(--sp-2); flex-wrap: wrap; align-items: center; }
 .point-row__dist { font-weight: 800; color: var(--accent); font-size: var(--fs-sm); }
 .tag-partner { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #8a5a00; background: var(--amber-soft); padding: 2px 7px; border-radius: var(--r-pill); }
+
+/* Desktop: lista vira painel lateral fixo, mapa em tela cheia (estilo maps) */
+@media (min-width: 900px) {
+  .point-sheet {
+    top: 0; bottom: 0; left: 0; right: auto;
+    width: min(380px, 32vw);
+    max-height: none;
+    border-radius: 0;
+    border-top: 0;
+    border-right: 1px solid var(--border);
+    box-shadow: var(--shadow-lg);
+  }
+  .point-sheet--collapsed { transform: translateX(-101%); }
+  .point-sheet__toggle { display: none; }
+  .point-sheet__head { padding-top: var(--sp-5); }
+  .map-controls { left: calc(min(380px, 32vw) + var(--sp-5)); }
+  .sheet-fab { top: var(--sp-5); left: var(--sp-5); bottom: auto; transform: none; }
+}
 
 /* ============================================================
    GENERIC PAGE
