@@ -1,0 +1,236 @@
+/* ============================================================
+   EcoColeta — Design System (tokens)
+   Conceito: tech-orgânico / editorial ambiental.
+   Fonte de verdade do DS. Não reescrever em Tailwind/CSS-in-JS.
+   ============================================================ */
+
+:root {
+  /* ---- Tipografia ---- */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+
+  --fs-display: clamp(2.4rem, 6vw, 4.2rem);
+  --fs-h1: clamp(1.9rem, 4vw, 2.8rem);
+  --fs-h2: clamp(1.4rem, 2.6vw, 1.9rem);
+  --fs-h3: 1.2rem;
+  --fs-body: 1rem;
+  --fs-sm: 0.875rem;
+  --fs-xs: 0.75rem;
+
+  --lh-tight: 1.05;
+  --lh-snug: 1.25;
+  --lh-body: 1.55;
+
+  /* ---- Paleta base (verde floresta + terroso) ---- */
+  --green-900: #0c2b1f;
+  --green-800: #0f3d2e;
+  --green-700: #14533e;
+  --green-600: #1b5e20;
+  --green-500: #2e7d4f;
+  --green-400: #4caf6d;
+  --green-300: #7fd99a;
+  --green-200: #b6ecc4;
+  --green-100: #e3f6e8;
+
+  --earth-700: #4e342e;
+  --earth-500: #6d4c41;
+  --earth-300: #a98274;
+  --earth-100: #efe6e0;
+
+  --amber: #e8a13a;
+  --amber-soft: #f6d79b;
+  --clay: #c2562f;
+  --sky: #2f88c2;
+
+  --leaf-glow: #9df5b4;
+
+  /* ---- Espaçamento (escala 4px) ---- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+  --sp-9: 6rem;
+
+  /* ---- Raio ---- */
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --r-xl: 32px;
+  --r-pill: 999px;
+
+  /* ---- Transições ---- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast: 140ms;
+  --t-med: 280ms;
+  --t-slow: 520ms;
+
+  --maxw: 1180px;
+  --header-h: 68px;
+}
+
+/* ===================== TEMA CLARO ===================== */
+:root,
+[data-theme='light'] {
+  --bg: #f3f7f0;
+  --bg-tint: #e9f2e6;
+  --surface: #ffffff;
+  --surface-2: #f6faf4;
+  --surface-raised: #ffffff;
+  --border: #d8e6d4;
+  --border-strong: #bcd2b5;
+
+  --text: #14271d;
+  --text-soft: #43564b;
+  --text-faint: #788379;
+  --on-accent: #ffffff;
+
+  --accent: var(--green-600);
+  --accent-hover: var(--green-700);
+  --accent-soft: var(--green-100);
+  --accent-ring: rgba(27, 94, 32, 0.28);
+
+  --cta: var(--green-500);
+  --warn: var(--amber);
+  --danger: #c0392b;
+
+  --grain-opacity: 0.04;
+  --shadow-sm: 0 1px 2px rgba(20, 39, 29, 0.06), 0 1px 3px rgba(20, 39, 29, 0.05);
+  --shadow-md: 0 6px 20px -6px rgba(20, 39, 29, 0.16);
+  --shadow-lg: 0 24px 60px -18px rgba(12, 43, 31, 0.32);
+  --shadow-glow: 0 0 0 4px var(--accent-ring);
+}
+
+/* ===================== TEMA ESCURO ===================== */
+[data-theme='dark'] {
+  --bg: #081a13;
+  --bg-tint: #0c241a;
+  --surface: #0f2c20;
+  --surface-2: #123528;
+  --surface-raised: #163d2d;
+  --border: #1f4733;
+  --border-strong: #2c5e44;
+
+  --text: #eaf5ec;
+  --text-soft: #abc6b5;
+  --text-faint: #7a9a87;
+  --on-accent: #06140d;
+
+  --accent: var(--green-300);
+  --accent-hover: var(--green-200);
+  --accent-soft: rgba(127, 217, 154, 0.14);
+  --accent-ring: rgba(127, 217, 154, 0.28);
+
+  --cta: var(--green-400);
+  --warn: var(--amber);
+  --danger: #e57373;
+
+  --grain-opacity: 0.06;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px -8px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 28px 70px -20px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 0 4px var(--accent-ring);
+}
+
+/* ===================== RESET ===================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(1200px 600px at 100% -10%, var(--bg-tint), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, var(--accent-soft), transparent 55%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color var(--t-med) var(--ease), color var(--t-med) var(--ease);
+}
+
+/* Grão sutil global */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: var(--grain-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.015em;
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+img { max-width: 100%; display: block; }
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-glow);
+  border-radius: var(--r-xs);
+}
+
+/* Scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: var(--r-pill);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
