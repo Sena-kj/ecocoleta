@@ -12,7 +12,8 @@ import Profile from './screens/Profile'
 import Ranking from './screens/Ranking'
 import Education from './screens/Education'
 import Rewards from './screens/Rewards'
-import AdminShell from './admin/AdminShell'
+import RequireAdmin from './admin/RequireAdmin'
+import AdminLogin from './admin/AdminLogin'
 import AdminDashboard from './admin/AdminDashboard'
 import AdminCatalog from './admin/AdminCatalog'
 import AdminPartners from './admin/AdminPartners'
@@ -39,9 +40,10 @@ export const router = createBrowserRouter([
       { path: 'education', element: <Education /> },
     ],
   },
+  { path: '/admin/login', element: <AdminLogin /> },
   {
     path: '/admin',
-    element: <AdminShell />,
+    element: <RequireAdmin />,
     children: [
       { index: true, element: <AdminDashboard /> },
       { path: 'catalog', element: <AdminCatalog /> },

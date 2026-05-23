@@ -1,5 +1,6 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { useTheme } from '../lib/theme'
+import { adminLogout } from './adminAuth'
 
 const NAV = [
   { to: '/admin', label: '📊 Visão geral', end: true },
@@ -29,6 +30,15 @@ export default function AdminShell() {
         <div className="admin-side__foot admin-nav">
           <a onClick={toggle} style={{ cursor: 'pointer' }}>🌓 Alternar tema</a>
           <a onClick={() => navigate('/app/map')} style={{ cursor: 'pointer' }}>← Voltar ao app</a>
+          <a
+            onClick={() => {
+              adminLogout()
+              navigate('/admin/login', { replace: true })
+            }}
+            style={{ cursor: 'pointer' }}
+          >
+            🔒 Sair do admin
+          </a>
         </div>
       </aside>
       <main className="admin-main">
