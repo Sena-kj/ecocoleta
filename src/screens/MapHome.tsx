@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MapContainer, Marker, TileLayer, useMap } from 'react-leaflet'
 import L from 'leaflet'
@@ -14,6 +14,23 @@ function markerIcon(p: CollectionPoint) {
     iconSize: [38, 38],
     iconAnchor: [19, 36],
   })
+}
+
+// Recalcula o tamanho do mapa sempre que o container muda (resize da janela,
+// abrir/fechar painel) — corrige a "faixa cinza" do Leaflet em telas largas.
+function AutoResize() {
+  const map = useMap()
+  useEffect(() => {
+    const container = map.getContainer()
+    const ro = new ResizeObserver(() => map.invalidateSize())
+    ro.observe(container)
+    const t = setTimeout(() => map.invalidateSize(), 250)
+    return () => {
+      ro.disconnect()
+      clearTimeout(t)
+    }
+  }, [map])
+  return null
 }
 
 function Recenter({ points }: { points: CollectionPoint[] }) {
@@ -79,6 +96,7 @@ export default function MapHome() {
             />
           ))}
           {points && <Recenter points={points} />}
+          <AutoResize />
         </MapContainer>
 
         {!sheetOpen && (
