@@ -198,6 +198,24 @@
   border-radius: var(--r-pill); font-weight: 800; font-size: var(--fs-sm);
 }
 
+/* Navegação no topo (desktop). No mobile fica escondida; usa a bottom-nav. */
+.topnav { display: none; }
+@media (min-width: 900px) {
+  .topnav {
+    display: flex; align-items: center; gap: 2px;
+    flex: 1 1 auto; justify-content: center;
+  }
+  .topnav__item {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 9px var(--sp-4); border-radius: var(--r-pill);
+    font-weight: 700; font-size: var(--fs-sm); color: var(--text-soft);
+    transition: background var(--t-fast), color var(--t-fast);
+  }
+  .topnav__item svg { width: 18px; height: 18px; }
+  .topnav__item:hover { background: var(--surface-2); color: var(--text); }
+  .topnav__item.active { background: var(--accent-soft); color: var(--accent); }
+}
+
 /* Bottom navigation */
 .bottomnav {
   flex: 0 0 auto; z-index: 600;
@@ -217,6 +235,11 @@
 .bottomnav__item.active { color: var(--accent); }
 .bottomnav__item.active .bottomnav__dot { opacity: 1; transform: scale(1); }
 .bottomnav__dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: 0; transform: scale(0); transition: all var(--t-fast) var(--ease); }
+
+/* No desktop a navegação migra para o topo (.topnav); esconde a barra de baixo. */
+@media (min-width: 900px) {
+  .bottomnav { display: none; }
+}
 
 /* ============================================================
    AUTH (login / cadastro / onboarding)

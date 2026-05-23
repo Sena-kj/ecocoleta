@@ -37,6 +37,16 @@ export default function AppShell() {
           <img src="/leaf.svg" alt="" />
           Eco<b>Coleta</b>
         </button>
+
+        <nav className="topnav" aria-label="Navegação">
+          {NAV.map((n) => (
+            <NavLink key={n.to} to={n.to} className={({ isActive }) => `topnav__item ${isActive ? 'active' : ''}`}>
+              <Icon name={n.icon} />
+              {n.label}
+            </NavLink>
+          ))}
+        </nav>
+
         <div className="topbar__actions">
           {me && (
             <span className="points-pill" title="Seus pontos totais">
