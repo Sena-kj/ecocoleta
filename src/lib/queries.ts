@@ -84,3 +84,7 @@ export function useAllPoints() {
 export function useAdminMetrics() {
   return useQuery({ queryKey: ['admin-metrics'], queryFn: api.getAdminMetrics })
 }
+
+export function useAdminRecentDisposals() {
+  return useQuery({ queryKey: ['admin-recent-disposals'], queryFn: api.getRecentDisposalsAdmin })
+}

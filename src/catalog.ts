@@ -58,3 +58,8 @@ export function haversine(a: { lat: number; lng: number }, b: { lat: number; lng
 
 // Centro de Curitiba (Praça Tiradentes) — fallback de localização
 export const CURITIBA_CENTER = { lat: -25.4284, lng: -49.2733 }
+
+// Raio de busca padrão (km). Fonte única consumida pelo MapHome, pelo default
+// de endpoints e pelo texto exibido no Login. 20 km cobrem Curitiba inteira e
+// mantêm os 14 pontos mock visíveis no mapa.
+export const SEARCH_RADIUS_KM = 20

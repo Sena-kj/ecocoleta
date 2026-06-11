@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Field } from '../components/ui'
+import { SEARCH_RADIUS_KM } from '../catalog'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -33,7 +34,7 @@ export default function Login() {
         <div className="auth__stats rise">
           <div className="auth__stat"><b>+14</b><span>pontos em Curitiba</span></div>
           <div className="auth__stat"><b>72%</b><span>têm e-lixo parado em casa</span></div>
-          <div className="auth__stat"><b>5 km</b><span>raio de busca</span></div>
+          <div className="auth__stat"><b>{SEARCH_RADIUS_KM} km</b><span>raio de busca</span></div>
         </div>
       </aside>
 

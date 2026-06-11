@@ -2,7 +2,7 @@
 // Para backend real: setar VITE_API_MODE=live e implementar o ramo `client`.
 import { IS_MOCK, delay } from './mode'
 import * as fx from './fixtures'
-import { haversine } from '../catalog'
+import { haversine, SEARCH_RADIUS_KM } from '../catalog'
 import type {
   Badge,
   CollectionPoint,
@@ -36,7 +36,7 @@ export interface NearbyParams {
 
 export async function getNearbyPoints({
   origin,
-  radiusMeters = 8000,
+  radiusMeters = SEARCH_RADIUS_KM * 1000,
   materials,
 }: NearbyParams): Promise<CollectionPoint[]> {
   if (IS_MOCK) {
@@ -177,6 +177,22 @@ export async function getAllPoints(): Promise<CollectionPoint[]> {
   if (IS_MOCK) {
     await delay(300)
     return fx.collectionPoints
+  }
+  return notLive()
+}
+
+/** Descarte enriquecido com o usuário autor — usado só no painel admin global. */
+export interface AdminDisposal extends Disposal {
+  userName: string
+  userEmail: string
+}
+
+export async function getRecentDisposalsAdmin(): Promise<AdminDisposal[]> {
+  if (IS_MOCK) {
+    await delay(400)
+    return [...fx.adminRecentDisposals].sort(
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+    )
   }
   return notLive()
 }

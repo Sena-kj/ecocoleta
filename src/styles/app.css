@@ -503,8 +503,11 @@
 .admin-side .brand { color: #fff; margin-bottom: var(--sp-5); }
 .admin-side .brand b { color: var(--leaf-glow); }
 .admin-nav { display: flex; flex-direction: column; gap: 4px; }
-.admin-nav a { display: flex; align-items: center; gap: var(--sp-3); padding: var(--sp-3) var(--sp-4); border-radius: var(--r-sm); color: #aac3d9; font-weight: 600; font-size: var(--fs-sm); transition: all var(--t-fast); }
-.admin-nav a:hover { background: rgba(255,255,255,0.06); color: #fff; }
+.admin-nav a,
+.admin-nav button { display: flex; align-items: center; gap: var(--sp-3); padding: var(--sp-3) var(--sp-4); border-radius: var(--r-sm); color: #aac3d9; font-weight: 600; font-size: var(--fs-sm); transition: all var(--t-fast); }
+.admin-nav button { width: 100%; text-align: left; background: none; border: 0; cursor: pointer; font-family: inherit; }
+.admin-nav a:hover,
+.admin-nav button:hover { background: rgba(255,255,255,0.06); color: #fff; }
 .admin-nav a.active { background: var(--accent); color: var(--on-accent); }
 .admin-side__foot { margin-top: auto; }
 .admin-main { padding: var(--sp-6) var(--sp-7); overflow-y: auto; max-height: 100dvh; }

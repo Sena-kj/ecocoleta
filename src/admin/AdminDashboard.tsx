@@ -1,4 +1,4 @@
-import { useAdminMetrics, useMyDisposals } from '../lib/queries'
+import { useAdminMetrics, useAdminRecentDisposals } from '../lib/queries'
 import { Card, Spinner, StatusBadge } from '../components/ui'
 import { CATEGORY_META } from '../catalog'
 
@@ -8,7 +8,7 @@ function fmtDate(iso: string) {
 
 export default function AdminDashboard() {
   const { data: m, isLoading } = useAdminMetrics()
-  const { data: disposals } = useMyDisposals()
+  const { data: disposals } = useAdminRecentDisposals()
 
   if (isLoading || !m) return <Spinner />
 
@@ -41,11 +41,17 @@ export default function AdminDashboard() {
         <Card style={{ padding: 'var(--sp-3) var(--sp-5)', overflowX: 'auto' }}>
           <table className="admin-table">
             <thead>
-              <tr><th>Material</th><th>Ponto</th><th>Data</th><th>Status</th></tr>
+              <tr><th>Usuário</th><th>Material</th><th>Ponto</th><th>Data</th><th>Status</th></tr>
             </thead>
             <tbody>
               {disposals?.map((d) => (
                 <tr key={d.id}>
+                  <td>
+                    <span className="stack" style={{ gap: 2, minWidth: 0 }}>
+                      <span>{d.userName}</span>
+                      <span className="faint" style={{ fontSize: 'var(--fs-sm)' }}>{d.userEmail}</span>
+                    </span>
+                  </td>
                   <td>{CATEGORY_META[d.material].emoji} {d.quantity}× {CATEGORY_META[d.material].label}</td>
                   <td>{d.pointName}</td>
                   <td>{fmtDate(d.createdAt)}</td>

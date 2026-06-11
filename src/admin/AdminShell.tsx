@@ -28,17 +28,17 @@ export default function AdminShell() {
           ))}
         </nav>
         <div className="admin-side__foot admin-nav">
-          <a onClick={toggle} style={{ cursor: 'pointer' }}>🌓 Alternar tema</a>
-          <a onClick={() => navigate('/app/map')} style={{ cursor: 'pointer' }}>← Voltar ao app</a>
-          <a
+          <button type="button" onClick={toggle}>🌓 Alternar tema</button>
+          <button type="button" onClick={() => navigate('/app/map')}>← Voltar ao app</button>
+          <button
+            type="button"
             onClick={() => {
               adminLogout()
               navigate('/admin/login', { replace: true })
             }}
-            style={{ cursor: 'pointer' }}
           >
             🔒 Sair do admin
-          </a>
+          </button>
         </div>
       </aside>
       <main className="admin-main">

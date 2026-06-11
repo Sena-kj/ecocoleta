@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { MapContainer, Marker, TileLayer, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import { useNearbyPoints } from '../lib/queries'
-import { CATEGORY_LIST, CURITIBA_CENTER, formatDistance } from '../catalog'
+import { CATEGORY_LIST, CURITIBA_CENTER, SEARCH_RADIUS_KM, formatDistance } from '../catalog'
 import { CategoryChip, Spinner, Stars } from '../components/ui'
 import type { CollectionPoint, MaterialCategory } from '../types'
 
@@ -35,11 +35,14 @@ function AutoResize() {
 
 function Recenter({ points }: { points: CollectionPoint[] }) {
   const map = useMap()
-  useMemo(() => {
-    if (points.length > 0) {
-      const bounds = L.latLngBounds(points.map((p) => [p.location.lat, p.location.lng]))
-      map.fitBounds(bounds, { padding: [60, 60], maxZoom: 14 })
-    }
+  const didFit = useRef(false)
+  useEffect(() => {
+    // Enquadra os pontos só no primeiro load com dados — refetch/troca de
+    // filtro não deve resetar o zoom/pan manual do usuário.
+    if (didFit.current || points.length === 0) return
+    const bounds = L.latLngBounds(points.map((p) => [p.location.lat, p.location.lng]))
+    map.fitBounds(bounds, { padding: [60, 60], maxZoom: 14 })
+    didFit.current = true
   }, [points, map])
   return null
 }
@@ -48,7 +51,7 @@ export default function MapHome() {
   const navigate = useNavigate()
   const [filters, setFilters] = useState<MaterialCategory[]>([])
   const [sheetOpen, setSheetOpen] = useState(true)
-  const { data: points, isLoading } = useNearbyPoints(CURITIBA_CENTER, 20000, filters)
+  const { data: points, isLoading } = useNearbyPoints(CURITIBA_CENTER, SEARCH_RADIUS_KM * 1000, filters)
 
   function toggle(cat: MaterialCategory) {
     setFilters((f) => (f.includes(cat) ? f.filter((c) => c !== cat) : [...f, cat]))

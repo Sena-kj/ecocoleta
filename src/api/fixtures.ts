@@ -8,6 +8,7 @@ import type {
   Redemption,
   User,
 } from '../types'
+import type { AdminDisposal } from './endpoints'
 
 // PII sintética — nenhum dado de pessoa real (mandate de sanitização de fixtures).
 export const currentUser: User = {
@@ -285,6 +286,59 @@ export const disposals: Disposal[] = [
     createdAt: '2026-04-15T13:20:00Z',
     validatedAt: '2026-04-15T13:35:00Z',
     expiresAt: '2026-04-16T13:20:00Z',
+  },
+]
+
+// Descartes recentes de toda a base (painel admin global). Usuários sintéticos
+// variados — espelha o que o admin veria, não o histórico da usuária logada.
+export const adminRecentDisposals: AdminDisposal[] = [
+  {
+    id: 'ad-101', qrCode: 'f2c8b4d7-6a9c-4e3f-8b1d-9c0e7f2a5d63', status: 'PENDING',
+    pointId: 'p-002', pointName: 'TechFix Assistência', material: 'CELULAR', quantity: 1,
+    pointsAwarded: 30, createdAt: '2026-05-23T15:42:00Z', expiresAt: '2026-05-24T15:42:00Z',
+    userName: 'Bianca Ferraz', userEmail: 'bianca.f@exemplo.example',
+  },
+  {
+    id: 'ad-102', qrCode: 'a3d9c5e8-7b0d-4f4a-9c2e-0d1f8a3b6e74', status: 'VALIDATED',
+    pointId: 'p-007', pointName: 'InfoCell Batel', material: 'NOTEBOOK_COMPUTADOR', quantity: 1,
+    pointsAwarded: 80, createdAt: '2026-05-23T11:18:00Z', validatedAt: '2026-05-23T11:40:00Z', expiresAt: '2026-05-24T11:18:00Z',
+    userName: 'Rafael Tominaga', userEmail: 'rafael.t@exemplo.example',
+  },
+  {
+    id: 'ad-103', qrCode: 'b4e0d6f9-8c1e-4a5b-8d3f-1e2a9b4c7f85', status: 'VALIDATED',
+    pointId: 'p-003', pointName: 'Ecoponto Pinheirinho', material: 'ELETRODOMESTICO_PEQUENO', quantity: 1,
+    pointsAwarded: 50, createdAt: '2026-05-22T17:05:00Z', validatedAt: '2026-05-22T17:30:00Z', expiresAt: '2026-05-23T17:05:00Z',
+    userName: 'Priscila Naves', userEmail: 'priscila.n@exemplo.example',
+  },
+  {
+    id: 'ad-104', qrCode: 'c5f1e7a0-9d2f-4b6c-9e4a-2f3b0c5d8a96', status: 'PENDING',
+    pointId: 'p-001', pointName: 'Ecocidadão Água Verde', material: 'PILHA_BATERIA', quantity: 8,
+    pointsAwarded: 40, createdAt: '2026-05-22T09:50:00Z', expiresAt: '2026-05-23T09:50:00Z',
+    userName: 'Diego Salim', userEmail: 'diego.s@exemplo.example',
+  },
+  {
+    id: 'ad-105', qrCode: 'd6a2f8b1-0e3a-4c7d-8f5b-3a4c1d6e9b07', status: 'VALIDATED',
+    pointId: 'p-014', pointName: 'CompuClean Mercês', material: 'CABOS_CARREGADORES', quantity: 5,
+    pointsAwarded: 25, createdAt: '2026-05-21T14:22:00Z', validatedAt: '2026-05-21T14:45:00Z', expiresAt: '2026-05-22T14:22:00Z',
+    userName: 'Heloísa Vidal', userEmail: 'heloisa.v@exemplo.example',
+  },
+  {
+    id: 'ad-106', qrCode: 'e7b3a9c2-1f4b-4d8e-9a6c-4b5d2e7f0c18', status: 'EXPIRED',
+    pointId: 'p-005', pointName: 'Shopping Capão Coleta', material: 'CELULAR', quantity: 2,
+    pointsAwarded: 60, createdAt: '2026-05-20T18:30:00Z', expiresAt: '2026-05-21T18:30:00Z',
+    userName: 'Caio Bertolini', userEmail: 'caio.b@exemplo.example',
+  },
+  {
+    id: 'ad-107', qrCode: 'f8c4b0d3-2a5c-4e9f-8b7d-5c6e3a8b1d29', status: 'VALIDATED',
+    pointId: 'p-009', pointName: 'ReparaTudo Portão', material: 'ELETRODOMESTICO_GRANDE', quantity: 1,
+    pointsAwarded: 150, createdAt: '2026-05-20T10:12:00Z', validatedAt: '2026-05-20T10:38:00Z', expiresAt: '2026-05-21T10:12:00Z',
+    userName: 'Otávio Brand', userEmail: 'otavio.b@exemplo.example',
+  },
+  {
+    id: 'ad-108', qrCode: 'a9d5c1e4-3b6d-4f0a-9c8e-6d7f4b9c2e30', status: 'PENDING',
+    pointId: 'p-011', pointName: 'GreenPoint UFPR Politécnico', material: 'OUTROS', quantity: 3,
+    pointsAwarded: 30, createdAt: '2026-05-19T16:55:00Z', expiresAt: '2026-05-20T16:55:00Z',
+    userName: 'Vitor Hugo Lemes', userEmail: 'vitor.l@exemplo.example',
   },
 ]
 
