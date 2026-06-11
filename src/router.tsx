@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { createHashRouter, Navigate } from 'react-router-dom'
 import AppShell from './components/AppShell'
 import Onboarding from './screens/Onboarding'
 import Login from './screens/Login'
@@ -19,7 +19,7 @@ import AdminCatalog from './admin/AdminCatalog'
 import AdminPartners from './admin/AdminPartners'
 import AdminRedemptions from './admin/AdminRedemptions'
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   { path: '/', element: <Navigate to="/onboarding" replace /> },
   { path: '/onboarding', element: <Onboarding /> },
   { path: '/login', element: <Login /> },

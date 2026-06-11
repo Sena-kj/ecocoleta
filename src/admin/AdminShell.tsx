@@ -17,7 +17,7 @@ export default function AdminShell() {
     <div className="admin-shell">
       <aside className="admin-side">
         <button className="brand" onClick={() => navigate('/admin')} aria-label="Admin">
-          <img src="/leaf.svg" alt="" width={26} height={26} />
+          <img src={`${import.meta.env.BASE_URL}leaf.svg`} alt="" width={26} height={26} />
           Eco<b>Admin</b>
         </button>
         <nav className="admin-nav">

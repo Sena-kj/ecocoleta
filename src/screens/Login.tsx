@@ -17,7 +17,7 @@ export default function Login() {
     <div className="auth">
       <aside className="auth__art">
         <span className="brand">
-          <img src="/leaf.svg" alt="" />
+          <img src={`${import.meta.env.BASE_URL}leaf.svg`} alt="" />
           Eco<b>Coleta</b>
         </span>
         <div className="auth__pitch rise">

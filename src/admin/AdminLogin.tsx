@@ -31,7 +31,7 @@ export default function AdminLogin() {
     <div className="admin-login">
       <Card className="admin-login__card rise">
         <span className="brand" style={{ justifyContent: 'center' }}>
-          <img src="/leaf.svg" alt="" width={30} height={30} />
+          <img src={`${import.meta.env.BASE_URL}leaf.svg`} alt="" width={30} height={30} />
           Eco<b>Admin</b>
         </span>
         <h1>Área restrita</h1>

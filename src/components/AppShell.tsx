@@ -34,7 +34,7 @@ export default function AppShell() {
     <div className="shell">
       <header className="topbar">
         <button className="brand" onClick={() => navigate('/app/map')} aria-label="Início">
-          <img src="/leaf.svg" alt="" />
+          <img src={`${import.meta.env.BASE_URL}leaf.svg`} alt="" />
           Eco<b>Coleta</b>
         </button>
 
