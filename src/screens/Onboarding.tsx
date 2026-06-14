@@ -58,6 +58,12 @@ export default function Onboarding() {
           {last ? 'Começar agora' : 'Continuar'}
         </Button>
       </Card>
+
+      <div className="onb__footlinks">
+        <button onClick={() => navigate('/partner/login')}>🤝 Área do parceiro</button>
+        <span aria-hidden>·</span>
+        <button onClick={() => navigate('/admin/login')}>🛠️ Painel administrativo</button>
+      </div>
     </div>
   )
 }

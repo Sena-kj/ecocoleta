@@ -136,6 +136,54 @@ export function EmptyState({
   )
 }
 
+// ---------- Skeleton ----------
+export function Skeleton({
+  width,
+  height = 14,
+  radius = 'var(--r-xs)',
+  className = '',
+  style,
+}: {
+  width?: number | string
+  height?: number | string
+  radius?: string
+  className?: string
+  style?: React.CSSProperties
+}) {
+  return (
+    <span
+      className={`skeleton ${className}`}
+      aria-hidden
+      style={{ width: width ?? '100%', height, borderRadius: radius, ...style }}
+    />
+  )
+}
+
+/** Cartão "fantasma" que imita o layout de um item de lista enquanto carrega. */
+export function SkeletonCard({ lines = 2, avatar = true }: { lines?: number; avatar?: boolean }) {
+  return (
+    <div className="skeleton-card" aria-hidden>
+      {avatar && <Skeleton width={48} height={48} radius="var(--r-sm)" />}
+      <div className="skeleton-card__body">
+        <Skeleton width="62%" height={16} />
+        {Array.from({ length: lines }).map((_, i) => (
+          <Skeleton key={i} width={i === lines - 1 ? '40%' : '85%'} height={12} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+export function SkeletonList({ count = 5, ...props }: { count?: number; lines?: number; avatar?: boolean }) {
+  return (
+    <div className="skeleton-list">
+      {Array.from({ length: count }).map((_, i) => (
+        <SkeletonCard key={i} {...props} />
+      ))}
+    </div>
+  )
+}
+
 // ---------- Status badge for disposals ----------
 const STATUS_LABEL: Record<string, { label: string; cls: string }> = {
   PENDING: { label: 'Aguardando validação', cls: 'pending' },

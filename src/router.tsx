@@ -18,6 +18,10 @@ import AdminDashboard from './admin/AdminDashboard'
 import AdminCatalog from './admin/AdminCatalog'
 import AdminPartners from './admin/AdminPartners'
 import AdminRedemptions from './admin/AdminRedemptions'
+import RequirePartner from './partner/RequirePartner'
+import PartnerLogin from './partner/PartnerLogin'
+import PartnerScanner from './partner/PartnerScanner'
+import PartnerPoint from './partner/PartnerPoint'
 
 export const router = createHashRouter([
   { path: '/', element: <Navigate to="/onboarding" replace /> },
@@ -49,6 +53,15 @@ export const router = createHashRouter([
       { path: 'catalog', element: <AdminCatalog /> },
       { path: 'partners', element: <AdminPartners /> },
       { path: 'redemptions', element: <AdminRedemptions /> },
+    ],
+  },
+  { path: '/partner/login', element: <PartnerLogin /> },
+  {
+    path: '/partner',
+    element: <RequirePartner />,
+    children: [
+      { index: true, element: <PartnerScanner /> },
+      { path: 'point', element: <PartnerPoint /> },
     ],
   },
   { path: '*', element: <Navigate to="/onboarding" replace /> },

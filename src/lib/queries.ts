@@ -77,6 +77,49 @@ export function useRedemptions() {
   return useQuery({ queryKey: ['redemptions'], queryFn: api.getRedemptions })
 }
 
+export function usePointReviews(pointId: string | undefined) {
+  return useQuery({
+    queryKey: ['reviews', pointId],
+    queryFn: () => api.getPointReviews(pointId!),
+    enabled: !!pointId,
+  })
+}
+
+export function useSubmitReview(pointId: string | undefined) {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: api.submitReview,
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['reviews', pointId] })
+      qc.invalidateQueries({ queryKey: ['point', pointId] })
+    },
+  })
+}
+
+export function useUpdateMe() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: api.updateMe,
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['me'] }),
+  })
+}
+
+export function usePartnerPoint() {
+  return useQuery({ queryKey: ['partner-point'], queryFn: api.getPartnerPoint })
+}
+
+export function usePartnerDisposals() {
+  return useQuery({ queryKey: ['partner-disposals'], queryFn: api.getPartnerDisposals })
+}
+
+export function useValidateQr() {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: api.validateDisposalByQr,
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['partner-disposals'] }),
+  })
+}
+
 export function useAllPoints() {
   return useQuery({ queryKey: ['all-points'], queryFn: api.getAllPoints })
 }

@@ -538,9 +538,121 @@
   .admin-main { max-height: none; min-height: 0; }
 }
 
+/* ---------------- Skeletons ---------------- */
+@keyframes shimmer { 100% { background-position: -200% 0; } }
+.skeleton {
+  display: block;
+  background: linear-gradient(90deg, var(--surface-2) 25%, color-mix(in srgb, var(--border) 60%, var(--surface-2)) 37%, var(--surface-2) 63%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+.skeleton-list { display: flex; flex-direction: column; gap: var(--sp-3); }
+.skeleton-card {
+  display: flex; gap: var(--sp-3); align-items: center;
+  padding: var(--sp-4); border: 1px solid var(--border); border-radius: var(--r-md); background: var(--surface);
+}
+.skeleton-card__body { flex: 1; display: flex; flex-direction: column; gap: var(--sp-2); min-width: 0; }
+@media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } }
+
+/* ---------------- Toasts ---------------- */
+.toast-stack {
+  position: fixed; z-index: 1000; left: 50%; bottom: calc(var(--sp-5) + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; gap: var(--sp-2); width: min(420px, calc(100vw - var(--sp-5) * 2));
+  pointer-events: none;
+}
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.toast {
+  pointer-events: auto; text-align: left; width: 100%;
+  display: flex; align-items: center; gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--border); border-left: 4px solid var(--accent);
+  border-radius: var(--r-md); box-shadow: var(--shadow-lg);
+  font-weight: 600; font-size: var(--fs-sm);
+  animation: toast-in var(--t-med) var(--ease-out) both;
+}
+.toast--success { border-left-color: var(--brand-500); }
+.toast--error { border-left-color: var(--danger); }
+.toast--info { border-left-color: var(--amber); }
+.toast__icon { font-size: 1.15rem; flex-shrink: 0; }
+.toast__msg { min-width: 0; }
+@media (max-width: 900px) {
+  .toast-stack { bottom: calc(72px + env(safe-area-inset-bottom)); }
+}
+
+/* ---------------- Modal de formulário ---------------- */
+.modal--form { max-width: 440px; text-align: left; }
+.modal--form h2 { text-align: left; width: 100%; }
+.modal--form > .muted { text-align: left; width: 100%; }
+.field__textarea { height: auto; min-height: 84px; padding: var(--sp-3) var(--sp-4); resize: vertical; line-height: var(--lh-body); }
+
+/* Rating star input */
+.rating-input { display: flex; gap: 4px; justify-content: center; }
+.rating-input__star {
+  background: none; border: 0; font-size: 2rem; line-height: 1; color: var(--border-strong);
+  transition: transform var(--t-fast) var(--ease), color var(--t-fast);
+}
+.rating-input__star.is-on { color: var(--amber); }
+.rating-input__star:hover { transform: scale(1.12); }
+
+/* Avatar picker */
+.avatar-picker { display: flex; flex-wrap: wrap; gap: var(--sp-2); justify-content: center; }
+.avatar-picker__opt {
+  width: 46px; height: 46px; border-radius: var(--r-sm); font-size: 1.5rem;
+  background: var(--surface-2); border: 2px solid var(--border); display: grid; place-items: center;
+  transition: all var(--t-fast) var(--ease);
+}
+.avatar-picker__opt:hover { border-color: var(--accent); transform: translateY(-2px); }
+.avatar-picker__opt.is-on { border-color: var(--accent); background: var(--accent-soft); }
+
+/* ---------------- Reviews ---------------- */
+.review-card { display: flex; gap: var(--sp-3); padding: var(--sp-4); align-items: flex-start; animation: rise var(--t-med) var(--ease-out) both; }
+.review-card__avatar {
+  width: 42px; height: 42px; flex-shrink: 0; border-radius: 50%; display: grid; place-items: center;
+  font-family: var(--font-display); font-weight: 700; font-size: var(--fs-sm);
+  background: var(--accent-soft); color: var(--accent);
+}
+
+/* ---------------- Profile edit button ---------------- */
+.profile-hero { position: relative; flex-wrap: wrap; }
+.profile-hero__edit { margin-left: auto; align-self: flex-start; }
+
+/* ---------------- Partner area ---------------- */
+.scanner-card { display: flex; flex-direction: column; align-items: center; gap: var(--sp-5); padding: var(--sp-6); max-width: 520px; }
+.scanner-frame {
+  width: 100%; max-width: 340px; aspect-ratio: 1; display: grid; place-items: center; font-size: 4rem;
+  background: var(--surface-2); border: 2px dashed var(--border-strong); border-radius: var(--r-lg);
+  color: var(--text-faint);
+}
+.partner-disposal { display: flex; gap: var(--sp-4); align-items: center; padding: var(--sp-4); }
+.mono-code {
+  font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace; font-size: 0.7rem; color: var(--text-faint);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
+}
+.partner-point-hero { display: flex; gap: var(--sp-5); align-items: center; padding: var(--sp-5); flex-wrap: wrap; }
+.partner-point-hero__icon {
+  width: 72px; height: 72px; flex-shrink: 0; border-radius: var(--r-md); display: grid; place-items: center;
+  font-size: 2.4rem; background: var(--accent-soft);
+}
+
+/* ---------------- Onboarding footer links ---------------- */
+.onb__footlinks { display: flex; align-items: center; gap: var(--sp-3); margin-top: var(--sp-5); color: var(--text-faint); font-size: var(--fs-xs); }
+.onb__footlinks button { background: none; border: 0; color: var(--text-faint); font-weight: 700; font-size: var(--fs-xs); }
+.onb__footlinks button:hover { color: var(--accent); }
+
+/* ---------------- List entrance stagger ---------------- */
+.reward-card, .article-card, .point-row, .disposal-card { animation: rise var(--t-med) var(--ease-out) both; }
+
 /* ---------------- Responsive ---------------- */
 @media (max-width: 720px) {
   .container { padding-inline: var(--sp-4); }
   .stat-grid { grid-template-columns: repeat(3, 1fr); }
   .points-pill { display: none; }
+  .profile-hero__edit { margin-left: 0; width: 100%; }
+  .modal--form { max-width: 100%; }
+  .partner-disposal { flex-wrap: wrap; }
 }
