@@ -44,7 +44,7 @@ export default function QrCode() {
         <p className="muted">Peça para escanear este código e validar seu descarte.</p>
 
         <div className="qr-frame">
-          <QRCodeSVG value={disposal.qrCode} size={208} level="M" fgColor="#0a3357" />
+          <QRCodeSVG value={disposal.qrCode} size={208} level="M" fgColor="#0b3a26" />
         </div>
 
         <div className="row" style={{ justifyContent: 'center', gap: 8 }}>

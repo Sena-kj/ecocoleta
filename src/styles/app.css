@@ -482,7 +482,7 @@
 .reward-stock { font-size: var(--fs-xs); color: var(--text-faint); }
 
 /* ---------------- Modal ---------------- */
-.modal-backdrop { position: fixed; inset: 0; z-index: 200; background: rgba(6, 18, 31, 0.55); backdrop-filter: blur(4px); display: grid; place-items: center; padding: var(--sp-5); animation: rise var(--t-fast) var(--ease-out) both; }
+.modal-backdrop { position: fixed; inset: 0; z-index: 200; background: rgba(5, 24, 14, 0.55); backdrop-filter: blur(4px); display: grid; place-items: center; padding: var(--sp-5); animation: rise var(--t-fast) var(--ease-out) both; }
 .modal { max-width: 380px; width: 100%; text-align: center; padding: var(--sp-7) var(--sp-6); display: grid; gap: var(--sp-3); justify-items: center; }
 
 /* ---------------- Admin login ---------------- */
