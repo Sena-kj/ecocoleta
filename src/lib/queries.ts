@@ -20,7 +20,8 @@ export function useNearbyPoints(
 export function usePoint(id: string | undefined) {
   return useQuery({
     queryKey: ['point', id],
-    queryFn: () => api.getPoint(id!),
+    // react-query v5 trata `undefined` como erro; normaliza "não encontrado" para null.
+    queryFn: async () => (await api.getPoint(id!)) ?? null,
     enabled: !!id,
   })
 }
@@ -32,7 +33,8 @@ export function useMyDisposals() {
 export function useDisposal(id: string | undefined) {
   return useQuery({
     queryKey: ['disposal', id],
-    queryFn: () => api.getDisposal(id!),
+    // react-query v5 trata `undefined` como erro; normaliza "não encontrado" para null.
+    queryFn: async () => (await api.getDisposal(id!)) ?? null,
     enabled: !!id,
   })
 }
