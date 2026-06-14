@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useMe, useRewards, useRedeem } from '../lib/queries'
-import { Button, Card, Spinner } from '../components/ui'
+import { Button, Card, EmptyState, SkeletonCard } from '../components/ui'
+import { useToast } from '../lib/toast'
 import type { Reward, RewardKind } from '../types'
 
 const KIND_LABEL: Record<RewardKind, string> = {
@@ -11,20 +12,24 @@ const KIND_LABEL: Record<RewardKind, string> = {
 }
 
 export default function Rewards() {
+  const toast = useToast()
   const { data: me } = useMe()
   const { data: rewards, isLoading } = useRewards()
   const redeem = useRedeem()
   const [done, setDone] = useState<Reward | null>(null)
   const [filter, setFilter] = useState<RewardKind | 'TODOS'>('TODOS')
 
-  if (isLoading || !rewards) return <div className="container page"><Spinner /></div>
-
   const points = me?.totalPoints ?? 0
-  const list = filter === 'TODOS' ? rewards : rewards.filter((r) => r.kind === filter)
+  const list = filter === 'TODOS' ? (rewards ?? []) : (rewards ?? []).filter((r) => r.kind === filter)
 
   async function handleRedeem(r: Reward) {
-    await redeem.mutateAsync(r.id)
-    setDone(r)
+    try {
+      await redeem.mutateAsync(r.id)
+      setDone(r)
+      toast.success(`${r.name} resgatado! −${r.pointsCost} pts`)
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : 'Não foi possível resgatar.')
+    }
   }
 
   return (
@@ -54,12 +59,22 @@ export default function Rewards() {
         ))}
       </div>
 
+      {isLoading && (
+        <div className="reward-grid">
+          {Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} avatar={false} lines={3} />)}
+        </div>
+      )}
+
+      {!isLoading && list.length === 0 && (
+        <EmptyState emoji="🎁" title="Nada nesta categoria" desc="Tente outro filtro para ver mais recompensas." />
+      )}
+
       <div className="reward-grid">
-        {list.map((r) => {
+        {list.map((r, i) => {
           const afford = points >= r.pointsCost
           const out = r.stock <= 0
           return (
-            <Card key={r.id} className="reward-card">
+            <Card key={r.id} className="reward-card" style={{ animationDelay: `${Math.min(i, 8) * 40}ms` }}>
               <div className="reward-card__emoji" aria-hidden>{r.emoji}</div>
               <span className="reward-kind">{KIND_LABEL[r.kind]}</span>
               <h3>{r.name}</h3>

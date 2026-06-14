@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { usePoint, useCreateDisposal } from '../lib/queries'
 import { Button, Card, Spinner, EmptyState, CategoryChip } from '../components/ui'
+import { useToast } from '../lib/toast'
 import { CATEGORY_META } from '../catalog'
 import type { MaterialCategory } from '../types'
 
@@ -9,6 +10,7 @@ export default function CreateDisposal() {
   const [params] = useSearchParams()
   const pointId = params.get('point') ?? ''
   const navigate = useNavigate()
+  const toast = useToast()
   const { data: point, isLoading } = usePoint(pointId)
   const createMut = useCreateDisposal()
 
@@ -28,8 +30,13 @@ export default function CreateDisposal() {
 
   async function submit() {
     if (!material) return
-    const created = await createMut.mutateAsync({ pointId, material, quantity: qty })
-    navigate(`/app/qr/${created.id}`)
+    try {
+      const created = await createMut.mutateAsync({ pointId, material, quantity: qty })
+      toast.success('Descarte criado! Mostre o QR Code ao parceiro.')
+      navigate(`/app/qr/${created.id}`)
+    } catch {
+      toast.error('Não foi possível criar o descarte.')
+    }
   }
 
   return (

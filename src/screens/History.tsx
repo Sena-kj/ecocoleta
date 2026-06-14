@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useMyDisposals } from '../lib/queries'
-import { Button, Card, Spinner, EmptyState, StatusBadge } from '../components/ui'
+import { Button, Card, SkeletonList, EmptyState, StatusBadge } from '../components/ui'
 import { CATEGORY_META } from '../catalog'
 
 function fmtDate(iso: string) {
@@ -19,7 +19,7 @@ export default function History() {
         <p>Acompanhe cada descarte e o status da validação.</p>
       </div>
 
-      {isLoading && <Spinner />}
+      {isLoading && <SkeletonList count={5} />}
       {!isLoading && disposals?.length === 0 && (
         <EmptyState
           title="Nenhum descarte ainda"
@@ -29,14 +29,14 @@ export default function History() {
       )}
 
       <div className="stack" style={{ gap: 'var(--sp-3)' }}>
-        {disposals?.map((d) => {
+        {disposals?.map((d, i) => {
           const meta = CATEGORY_META[d.material]
           const clickable = d.status === 'PENDING'
           return (
             <Card
               key={d.id}
               className="disposal-card"
-              style={{ cursor: clickable ? 'pointer' : 'default' }}
+              style={{ cursor: clickable ? 'pointer' : 'default', animationDelay: `${Math.min(i, 10) * 35}ms` }}
               onClick={() => clickable && navigate(`/app/qr/${d.id}`)}
             >
               <span className="disposal-card__icon">{meta.emoji}</span>

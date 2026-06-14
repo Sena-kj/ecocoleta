@@ -1,5 +1,5 @@
 import { useRanking } from '../lib/queries'
-import { Card, Spinner } from '../components/ui'
+import { Card, SkeletonList } from '../components/ui'
 
 const MEDALS = ['🥇', '🥈', '🥉']
 
@@ -10,7 +10,16 @@ function initials(name: string) {
 export default function Ranking() {
   const { data: ranking, isLoading } = useRanking()
 
-  if (isLoading || !ranking) return <div className="container page"><Spinner /></div>
+  if (isLoading || !ranking)
+    return (
+      <div className="container page">
+        <div className="page__head">
+          <span className="eyebrow">Curitiba</span>
+          <h1>Ranking do mês</h1>
+        </div>
+        <SkeletonList count={6} avatar />
+      </div>
+    )
 
   const top3 = ranking.slice(0, 3)
   const rest = ranking.slice(3)

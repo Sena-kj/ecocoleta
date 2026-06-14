@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useArticles } from '../lib/queries'
-import { Button, Card, Spinner } from '../components/ui'
+import { Button, Card, SkeletonCard } from '../components/ui'
 import { CATEGORY_META } from '../catalog'
 import type { EducationArticle } from '../types'
 
@@ -13,7 +13,18 @@ export default function Education() {
   const { data: articles, isLoading } = useArticles()
   const [open, setOpen] = useState<EducationArticle | null>(null)
 
-  if (isLoading || !articles) return <div className="container page"><Spinner /></div>
+  if (isLoading || !articles)
+    return (
+      <div className="container page">
+        <div className="page__head">
+          <span className="eyebrow">Educação ambiental</span>
+          <h1>Aprender</h1>
+        </div>
+        <div className="article-grid">
+          {Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} avatar={false} lines={3} />)}
+        </div>
+      </div>
+    )
 
   if (open) {
     return (
@@ -38,8 +49,8 @@ export default function Education() {
       </div>
 
       <div className="article-grid">
-        {articles.map((a) => (
-          <Card key={a.id} className="article-card" onClick={() => setOpen(a)}>
+        {articles.map((a, i) => (
+          <Card key={a.id} className="article-card" onClick={() => setOpen(a)} style={{ animationDelay: `${Math.min(i, 8) * 45}ms` }}>
             <div className="article-card__top" aria-hidden>{emojiFor(a)}</div>
             <div className="article-card__body">
               <h3>{a.title}</h3>

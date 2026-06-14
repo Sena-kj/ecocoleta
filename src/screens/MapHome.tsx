@@ -4,7 +4,7 @@ import { MapContainer, Marker, TileLayer, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import { useNearbyPoints } from '../lib/queries'
 import { CATEGORY_LIST, CURITIBA_CENTER, SEARCH_RADIUS_KM, formatDistance } from '../catalog'
-import { CategoryChip, Spinner, Stars } from '../components/ui'
+import { CategoryChip, SkeletonList, Stars, EmptyState } from '../components/ui'
 import type { CollectionPoint, MaterialCategory } from '../types'
 
 function markerIcon(p: CollectionPoint) {
@@ -119,9 +119,16 @@ export default function MapHome() {
             </button>
           </div>
           <div className="point-sheet__list">
-            {isLoading && <Spinner label="Buscando pontos em Curitiba…" />}
-            {points?.map((p) => (
-              <button key={p.id} className="point-row" onClick={() => navigate(`/app/point/${p.id}`)}>
+            {isLoading && <SkeletonList count={5} />}
+            {!isLoading && points?.length === 0 && (
+              <EmptyState
+                emoji="🔍"
+                title="Nenhum ponto encontrado"
+                desc="Nenhum ponto aceita esse filtro de material por aqui. Tente remover algum filtro."
+              />
+            )}
+            {points?.map((p, i) => (
+              <button key={p.id} className="point-row" onClick={() => navigate(`/app/point/${p.id}`)} style={{ animationDelay: `${Math.min(i, 10) * 35}ms` }}>
                 <span className={`point-row__icon ${p.isPartner ? 'point-row__icon--partner' : ''}`}>
                   {p.isPartner ? '🤝' : '📍'}
                 </span>
