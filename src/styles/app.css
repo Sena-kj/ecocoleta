@@ -274,7 +274,7 @@
 .auth__form { display: grid; place-items: center; padding: var(--sp-6); }
 .auth__formInner { width: 100%; max-width: 380px; }
 .auth__formInner h2 { font-size: var(--fs-h1); }
-.auth__formInner > p { color: var(--text-soft); margin-top: var(--sp-2); margin-bottom: var(--sp-6); }
+.auth__formInner h2 + p { color: var(--text-soft); margin-top: var(--sp-2); margin-bottom: var(--sp-6); }
 .auth__alt { margin-top: var(--sp-5); text-align: center; color: var(--text-soft); font-size: var(--fs-sm); }
 .auth__alt a { color: var(--accent); font-weight: 700; }
 .auth__divider { display: flex; align-items: center; gap: var(--sp-3); margin: var(--sp-5) 0; color: var(--text-faint); font-size: var(--fs-xs); }

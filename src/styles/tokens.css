@@ -32,15 +32,9 @@
   --brand-200: #bdeccf;
   --brand-100: #e3f6ec;
 
-  --earth-700: #4e342e;
-  --earth-500: #6d4c41;
-  --earth-300: #a98274;
-  --earth-100: #efe6e0;
-
+  /* Acento secundário terroso/âmbar — CTA de destaque, parceiros, pódio. */
   --amber: #e8a13a;
   --amber-soft: #f6d79b;
-  --clay: #c2562f;
-  --sky: #2f88c2;
 
   --leaf-glow: #9af5b4;
 
@@ -81,7 +75,6 @@
   --bg-tint: #dcefe2;
   --surface: #ffffff;
   --surface-2: #f0f8f3;
-  --surface-raised: #ffffff;
   --border: #d2e8db;
   --border-strong: #aed4bd;
 
@@ -95,8 +88,6 @@
   --accent-soft: var(--brand-100);
   --accent-ring: rgba(27, 122, 75, 0.26);
 
-  --cta: var(--brand-500);
-  --warn: var(--amber);
   --danger: #c0392b;
 
   --grain-opacity: 0.04;
@@ -112,7 +103,6 @@
   --bg-tint: #0a2418;
   --surface: #0e2a1c;
   --surface-2: #123524;
-  --surface-raised: #16402b;
   --border: #1d4631;
   --border-strong: #2a6244;
 
@@ -126,8 +116,6 @@
   --accent-soft: rgba(130, 214, 166, 0.15);
   --accent-ring: rgba(130, 214, 166, 0.30);
 
-  --cta: var(--brand-400);
-  --warn: var(--amber);
   --danger: #e57373;
 
   --grain-opacity: 0.06;
