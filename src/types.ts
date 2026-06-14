@@ -90,6 +90,15 @@ export interface Level {
   max: number | null
 }
 
+export interface Review {
+  id: string
+  pointId: string
+  userName: string
+  rating: number // 1..5
+  comment: string
+  createdAt: string
+}
+
 export interface EducationArticle {
   id: string
   category: MaterialCategory | 'GERAL'

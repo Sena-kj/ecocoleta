@@ -21,7 +21,7 @@ export default function Login() {
       title={<>Descartar certo,<br />tão fácil quanto <em>jogar fora</em>.</>}
       pitch="Encontre pontos de coleta de lixo eletrônico perto de você, ganhe pontos e vire referência ambiental no seu bairro."
       stats={[
-        { value: '+14', label: 'pontos em Curitiba' },
+        { value: '+20', label: 'pontos em Curitiba' },
         { value: '72%', label: 'têm e-lixo parado em casa' },
         { value: `${SEARCH_RADIUS_KM} km`, label: 'raio de busca' },
       ]}

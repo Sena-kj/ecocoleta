@@ -61,5 +61,5 @@ export const CURITIBA_CENTER = { lat: -25.4284, lng: -49.2733 }
 
 // Raio de busca padrão (km). Fonte única consumida pelo MapHome, pelo default
 // de endpoints e pelo texto exibido no Login. 20 km cobrem Curitiba inteira e
-// mantêm os 14 pontos mock visíveis no mapa.
+// mantêm os ~20 pontos mock visíveis no mapa.
 export const SEARCH_RADIUS_KM = 20
