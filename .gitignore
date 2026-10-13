@@ -8,3 +8,17 @@ dist-ssr
 .DS_Store
 *.log
 .vite
+
+# Pacotes de entrega e dados locais
+*.zip
+*.db
+*.sqlite
+
+# Python (caso apareça)
+.venv/
+__pycache__/
+.pytest_cache/
+target/
+
+# Processo interno (relatórios de review ficam locais)
+coordination/
